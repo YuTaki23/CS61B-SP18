@@ -1,10 +1,10 @@
 public class LinkedListDeque<T> {
-    public class IntNode {
+    private class IntNode {
         public IntNode prev;
         public T item;
         public IntNode next;
 
-        private IntNode(IntNode p, T i, IntNode n) {
+        public IntNode(IntNode p, T i, IntNode n) {
             this.prev = p;
             this.item = i;
             this.next = n;
