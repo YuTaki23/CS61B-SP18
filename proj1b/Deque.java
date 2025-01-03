@@ -1,9 +1,19 @@
-public interface Deque<Item> {
+public interface Deque<T> {
+    void addFirst(T item);
+
+    void addLast(T item);
+
+    boolean isEmpty();
+
+    int size();
+
     void printDeque();
 
-    Item getRecursive(int i);
+    T get(int index);
 
-    Item removeFirst();
+    T getRecursive(int i);
 
-    Item removeLast();
+    T removeFirst();
+
+    T removeLast();
 }
