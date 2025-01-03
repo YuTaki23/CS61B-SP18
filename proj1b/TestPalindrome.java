@@ -19,7 +19,7 @@ public class TestPalindrome {
     @Test
     public void testIsPalindromeSpaceWord() {
         assertFalse(palindrome.isPalindrome("aba "));
-        assertFalse(palindrome.isPalindrome("aba"));
+        assertTrue(palindrome.isPalindrome("aba"));
     }
 
     @Test
