@@ -17,6 +17,12 @@ public class TestPalindrome {
     }
 
     @Test
+    public void testIsPalindromeSpaceWord() {
+        assertFalse(palindrome.isPalindrome("aba "));
+        assertFalse(palindrome.isPalindrome("aba"));
+    }
+
+    @Test
     public void testIsPalindromeOneWord() {
         assertTrue(palindrome.isPalindrome("a"));
         assertTrue(palindrome.isPalindrome("B"));
