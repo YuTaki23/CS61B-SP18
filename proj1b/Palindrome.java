@@ -7,4 +7,17 @@ public class Palindrome {
         }
         return items;
     }
+
+    public boolean isPalindrome(String word) {
+        Deque<Character> items = new LinkedListDeque<>();
+        items = wordToDeque(word);
+        for (int i = 0; i < word.length() / 2; i++) {
+            char first = items.removeFirst();
+            char last = items.removeLast();
+            if (first != last) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
