@@ -35,4 +35,19 @@ public class TestPalindrome {
         assertFalse(palindrome.isPalindrome("cat"));
         assertFalse(palindrome.isPalindrome("abA"));
     }
+
+    @Test
+    public void testIsPalindromeCCZeroAndOneWord() {
+        CharacterComparator cc = new OffByOne();
+        assertTrue(palindrome.isPalindrome(" ", cc));
+        assertTrue(palindrome.isPalindrome("a", cc));
+    }
+
+    @Test
+    public void testIsPalindromeCCWords() {
+        CharacterComparator cc = new OffByOne();
+        assertTrue(palindrome.isPalindrome("flake", cc));
+        assertTrue(palindrome.isPalindrome("cad", cc));
+        assertFalse(palindrome.isPalindrome("jadslasd", cc));
+    }
 }
