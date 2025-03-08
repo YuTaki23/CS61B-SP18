@@ -1,5 +1,5 @@
 public class NBody {
-    public static final String imgPath = "images/starfield.jpg";
+    private static final String imgPath = "images/starfield.jpg";
     public static void main(String[] args) {
         String TString = args[0];
         String dtString = args[1];
