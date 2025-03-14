@@ -104,5 +104,4 @@ public class LinkedListDeque<T> {
             return getRecursive(index, currentNode);
         }
     }
-
 }
