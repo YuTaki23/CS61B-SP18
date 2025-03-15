@@ -35,11 +35,11 @@ public class ArrayDeque<T> {
         T[] arr = (T[]) new Object[newCapacity];
         for (int i = 1; i <= size; i++) {
             arr[i] = items[(++nextFirst) % this.capacity];
-            this.capacity = capacity;
-            nextFirst = 0;
-            nextLast = size + 1;
-            items = arr;
         }
+        this.capacity = capacity;
+        nextFirst = 0;
+        nextLast = size + 1;
+        items = arr;
     }
 
     public void addFirst(T item) {
