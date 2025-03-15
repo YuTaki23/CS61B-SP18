@@ -3,18 +3,18 @@ public class ArrayDeque<T> {
     private int nextFirst;
     private T[] items;
     private int nextLast;
-    private static final int initCapacity = 8;
     private int capacity;
 
     public ArrayDeque() {
         this.size = 0;
         this.nextFirst = 4;
-        this.items = (T[]) new Object[initCapacity];
+        this.items = (T[]) new Object[8];
         this.nextLast = 5;
+        this.capacity = 8;
     }
 
     private int plus(int index) {
-        if (index == capacity) {
+        if (index == capacity - 1) {
             index = 0;
         } else {
             index++;
@@ -36,7 +36,7 @@ public class ArrayDeque<T> {
         int p = nextFirst;
         for (int i = 0; i < Math.min(size, newCapacity); i++) {
             arr[i] = items[p];
-            p = (p + 1) % capacity;
+            p = plus(p);
         }
         items = arr;
         nextFirst = 0;
@@ -76,10 +76,11 @@ public class ArrayDeque<T> {
         }
         int index = nextFirst;
         index = plus(index);
-        while (index != nextFirst) {
+        while (index != nextLast - 1) {
             System.out.print(items[index] + " ");
             index = plus(index);
         }
+        System.out.print(items[nextLast - 1]);
     }
 
     public T removeFirst() {
