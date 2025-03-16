@@ -3,6 +3,7 @@ import static org.junit.Assert.*;
 
 public class TestOffByN {
     static CharacterComparator offBy5 = new OffByN(5);
+    static CharacterComparator offBy1 = new OffByN(1);
 
     @Test
     public void testEqualCharsFiveTrue() {
@@ -13,5 +14,11 @@ public class TestOffByN {
     @Test
     public void testEqualCharsFiveFalse() {
         assertFalse(offBy5.equalChars('h', 'f'));
+    }
+
+    @Test
+    public void testEqualCharsOneTrue() {
+        assertTrue(offBy1.equalChars('A', 'b'));
+        assertTrue(offBy1.equalChars('R', 'q'));
     }
 }
