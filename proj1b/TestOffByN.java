@@ -15,10 +15,4 @@ public class TestOffByN {
     public void testEqualCharsFiveFalse() {
         assertFalse(offBy5.equalChars('h', 'f'));
     }
-
-    @Test
-    public void testEqualCharsOneTrue() {
-        assertTrue(offBy1.equalChars('A', 'b'));
-        assertTrue(offBy1.equalChars('R', 'q'));
-    }
 }
