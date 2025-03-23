@@ -111,9 +111,6 @@ public class Percolation {
         if (row < 0 || row > N - 1 || col < 0 || col > N - 1) {
             throw new IndexOutOfBoundsException();
         }
-        if (isOpen(row, col)) {
-            return false;
-        }
         int index = xyTo1D(row, col);
         return wquufWithBackWash.connected(index, virtualTopSite);
     }
@@ -131,5 +128,9 @@ public class Percolation {
      */
     public boolean percolates() {
         return wquuf.connected(virtualTopSite, virtualBottomSite);
+    }
+
+    public static void main(String[] args) {
+
     }
 }
