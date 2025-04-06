@@ -28,29 +28,27 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
      * 返回第i个节点的左节点的index
      */
     private static int leftIndex(int i) {
-        /* TODO: Your code here! */
-        return 0;
+        return 2 * i;
     }
 
     /**
      * Returns the index of the node to the right of the node at i.
      */
     private static int rightIndex(int i) {
-        /* TODO: Your code here! */
-        return 0;
+        return 2 * i + 1;
     }
 
     /**
      * Returns the index of the node that is the parent of the node at i.
      */
     private static int parentIndex(int i) {
-        /* TODO: Your code here! */
-        return 0;
+        return i / 2;
     }
 
     /**
      * Gets the node at the ith index, or returns null if the index is out of
      * bounds.
+     * 返回第i个节点 若越界则返回null
      */
     private Node getNode(int index) {
         if (!inBounds(index)) {
@@ -63,6 +61,7 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
      * Returns true if the index corresponds to a valid item. For example, if
      * we have 5 items, then the valid indices are 1, 2, 3, 4, 5. Index 0 is
      * invalid because we leave the 0th entry blank.
+     * 若第index个item是一个有效的item则返回true
      */
     private boolean inBounds(int index) {
         if ((index > size) || (index < 1)) {
@@ -73,6 +72,7 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
 
     /**
      * Swap the nodes at the two indices.
+     * 交换两节点
      */
     private void swap(int index1, int index2) {
         Node node1 = getNode(index1);
@@ -81,10 +81,10 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
         contents[index2] = node1;
     }
 
-
     /**
      * Returns the index of the node with smaller priority. Precondition: not
      * both nodes are null.
+     * 返回最小优先级节点的index
      */
     private int min(int index1, int index2) {
         Node node1 = getNode(index1);
@@ -100,16 +100,17 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
         }
     }
 
-
     /**
      * Bubbles up the node currently at the given index.
      */
     private void swim(int index) {
         // Throws an exception if index is invalid. DON'T CHANGE THIS LINE.
         validateSinkSwimArg(index);
-
-        /** TODO: Your code here. */
-        return;
+        while (min(index, parentIndex(index)) == index &&
+                inBounds(parentIndex(index))) {
+            swap(index, parentIndex(index));
+            index = parentIndex(index);
+        }
     }
 
     /**
@@ -118,9 +119,28 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
     private void sink(int index) {
         // Throws an exception if index is invalid. DON'T CHANGE THIS LINE.
         validateSinkSwimArg(index);
+        while (true) {
+            int left = leftIndex(index);
+            int right = rightIndex(index);
+            int smallest = index;
 
-        /** TODO: Your code here. */
-        return;
+            // Compare with left child
+            if (min(left, smallest) == left) {
+                smallest = left;
+            }
+            // Compare with right child
+            if (min(right, smallest) == right  ) {
+                smallest = right;
+            }
+
+            // If the smallest is not the current index, swap and continue sinking
+            if (smallest != index) {
+                swap(index, smallest);
+                index = smallest;
+            } else {
+                break; // Stop when the current node is smaller than both children
+            }
+        }
     }
 
     /**
@@ -134,7 +154,10 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
             resize(contents.length * 2);
         }
 
-        /* TODO: Your code here! */
+        Node currentNode = new Node(item, priority);
+        size += 1;
+        contents[size] = currentNode;
+        swim(size);
     }
 
     /**
@@ -143,8 +166,11 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
      */
     @Override
     public T peek() {
-        /* TODO: Your code here! */
-        return null;
+        if (size <= 0) {
+            return null;
+        } else {
+            return contents[1].myItem;
+        }
     }
 
     /**
@@ -158,8 +184,12 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
      */
     @Override
     public T removeMin() {
-        /* TODO: Your code here! */
-        return null;
+        T res = peek();
+        swap(1, size);
+        contents[size] = null;
+        size--;
+        sink(1);
+        return res;
     }
 
     /**
@@ -181,7 +211,6 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
      */
     @Override
     public void changePriority(T item, double priority) {
-        /* TODO: Your code here! */
         return;
     }
 
