@@ -17,6 +17,9 @@ public class RadixSort {
      */
     public static String[] sort(String[] asciis) {
         // TODO: Implement LSD Sort
+        if (asciis == null || asciis.length <= 1) {
+            return asciis;
+        }
         return null;
     }
 
