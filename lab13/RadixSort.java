@@ -1,3 +1,5 @@
+import java.util.*;
+
 /**
  * Class for doing Radix sort
  *
@@ -20,7 +22,19 @@ public class RadixSort {
         if (asciis == null || asciis.length <= 1) {
             return asciis;
         }
-        return null;
+        String[] res = Arrays.copyOf(asciis, asciis.length);
+
+        int maxStringLength = 0;
+        for (String ascii : res) {
+            if (ascii.length() > maxStringLength) {
+                maxStringLength = ascii.length();
+            }
+        }
+
+        for (int j = maxStringLength - 1; j >= 0; j--) {
+            sortHelperLSD(res, j);
+        }
+        return res;
     }
 
     /**
@@ -31,7 +45,25 @@ public class RadixSort {
      */
     private static void sortHelperLSD(String[] asciis, int index) {
         // Optional LSD helper method for required LSD radix sort
-        return;
+        ArrayList<String>[] bucket_ = new ArrayList[256];
+        for (int i = 0; i < 256; i++) {
+            bucket_[i] = new ArrayList<>();
+        }
+
+        for (String ascii : asciis) {
+            int key = 0;
+            if (index < ascii.length()) {
+                key = ascii.charAt(index);
+            }
+            bucket_[key].add(ascii);
+        }
+
+        int i = 0;
+        for (ArrayList<String> bucket : bucket_) {
+            for (String s : bucket) {
+                asciis[i++] = s;
+            }
+        }
     }
 
     /**
